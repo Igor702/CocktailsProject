@@ -2,8 +2,12 @@ package com.example.cocktailsproject
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.cocktailsproject.databinding.FragmentInfoBinding
 
@@ -13,16 +17,67 @@ class InfoFragment: Fragment() {
     private val binding get() = _binding!!
 
 
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentInfoBinding.inflate(inflater, container, false)
+
+        binding.apply {
+            toolbarInfo.title = textviewCocktailName.text
+
+        }
+
 
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+
+            //inflate menu
+            toolbarInfo.inflateMenu(R.menu.menu_info)
+
+            //click listener for menu
+            toolbarInfo.setOnMenuItemClickListener {
+
+                setVisibilityOfMenuItems(it.itemId)
+
+            }
+        }
+
+
+
+
+    }
+
+    private fun setVisibilityOfMenuItems(id: Int):Boolean{
+        val menu:Menu = binding.toolbarInfo.menu
+        val addToFavourites:MenuItem = menu.findItem(R.id.add_to_favourites)
+        val inFavourites:MenuItem = menu.findItem(R.id.in_favourites)
+
+        if (id == R.id.add_to_favourites){
+            Toast.makeText(requireContext(), "Added", Toast.LENGTH_SHORT).show()
+            addToFavourites.isVisible = false
+            inFavourites.isVisible = true
+
+            return true
+        }else if (id == R.id.in_favourites){
+
+            Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show()
+            addToFavourites.isVisible = true
+            inFavourites.isVisible =false
+            return true
+        }
+
+        return false
+
     }
 
 

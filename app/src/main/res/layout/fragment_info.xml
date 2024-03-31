@@ -1,15 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".MainActivity"
+    android:fitsSystemWindows="true"
+    >
 
-    <TextView
-        android:id="@+id/tv_1"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="some text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:fitsSystemWindows="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@id/toolbar_info"
+            app:contentScrim="@android:color/transparent"
+            >
+
+            <ImageView
+                android:id="@+id/imageview_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                android:fitsSystemWindows="true"
+                android:src="@drawable/kompot"
+                android:importantForAccessibility="no"
+                />
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_info"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/textview_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="32sp"
+                android:text="Name:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+            <TextView
+                android:id="@+id/textview_cocktail_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="32sp"
+                android:text="Jin tonic"
+                app:layout_constraintStart_toEndOf="@id/textview_name"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/textview_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="20sp"
+                android:text="Category:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_name"
+                />
+
+            <TextView
+                android:id="@+id/textview_cocktail_category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="20sp"
+                android:text="Cocktails with jin"
+                app:layout_constraintStart_toEndOf="@id/textview_category"
+                app:layout_constraintTop_toBottomOf="@id/textview_cocktail_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/textview_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="20sp"
+                android:text="Type:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_category"
+                />
+
+            <TextView
+                android:id="@+id/textview_cocktail_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="20sp"
+                android:text="Cocktails type"
+                app:layout_constraintStart_toEndOf="@id/textview_type"
+                app:layout_constraintTop_toBottomOf="@id/textview_cocktail_category"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/textview_glass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="20sp"
+                android:text="Glass type:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_type"
+                />
+
+            <TextView
+                android:id="@+id/textview_glass_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="20sp"
+                android:text="Cocktails type"
+                app:layout_constraintStart_toEndOf="@id/textview_glass"
+                app:layout_constraintTop_toBottomOf="@id/textview_cocktail_type"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/textview_ingredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="20sp"
+                android:text="Ingredients:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_glass"
+                />
+
+
+            <TextView
+                android:id="@+id/textview_ingredients_cocktail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="20sp"
+                android:text="Cocktails ingredients"
+                app:layout_constraintStart_toEndOf="@id/textview_ingredients"
+                app:layout_constraintTop_toBottomOf="@id/textview_glass_type"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
