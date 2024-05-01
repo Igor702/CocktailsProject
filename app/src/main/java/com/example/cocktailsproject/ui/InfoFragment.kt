@@ -1,4 +1,4 @@
-package com.example.cocktailsproject
+package com.example.cocktailsproject.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,20 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import com.example.cocktailsproject.R
 import com.example.cocktailsproject.databinding.FragmentInfoBinding
 
 class InfoFragment: Fragment() {
 
     private var _binding: FragmentInfoBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel:CocktailsViewModel by viewModels{
+        CocktailsViewModel.Factory
+    }
 
 
 
@@ -29,6 +35,8 @@ class InfoFragment: Fragment() {
 
         binding.apply {
             toolbarInfo.title = textviewCocktailName.text
+
+          textviewCocktailName.text =  viewModel.getData()
 
         }
 

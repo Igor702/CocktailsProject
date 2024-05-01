@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/infoFragment"
-        android:name="com.example.cocktailsproject.InfoFragment"
+        android:name="com.example.cocktailsproject.ui.InfoFragment"
         android:label="InfoFragment" />
 </navigation>
