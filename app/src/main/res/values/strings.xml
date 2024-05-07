@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CocktailsProject</string>
+    <string name="something_get_wrong">Something get wrong</string>
 </resources>
