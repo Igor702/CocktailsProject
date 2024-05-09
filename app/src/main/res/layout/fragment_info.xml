@@ -60,8 +60,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textSize="32sp"
                 android:text="Name:"
+                android:textSize="32sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
 
@@ -72,92 +72,84 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textSize="32sp"
                 android:text="Jin tonic"
-                app:layout_constraintStart_toEndOf="@id/textview_name"
-                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="32sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textview_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textSize="20sp"
                 android:text="Category:"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_name"
-                />
+                app:layout_constraintTop_toBottomOf="@id/textview_cocktail_name" />
 
             <TextView
                 android:id="@+id/textview_cocktail_category"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textSize="20sp"
                 android:text="Cocktails with jin"
-                app:layout_constraintStart_toEndOf="@id/textview_category"
-                app:layout_constraintTop_toBottomOf="@id/textview_cocktail_name"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/textview_cocktail_name" />
 
             <TextView
                 android:id="@+id/textview_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textSize="20sp"
                 android:text="Type:"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_category"
-                />
+                app:layout_constraintTop_toBottomOf="@id/textview_cocktail_category" />
 
             <TextView
                 android:id="@+id/textview_cocktail_type"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textSize="20sp"
                 android:text="Cocktails type"
-                app:layout_constraintStart_toEndOf="@id/textview_type"
-                app:layout_constraintTop_toBottomOf="@id/textview_cocktail_category"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/textview_cocktail_category" />
 
             <TextView
                 android:id="@+id/textview_glass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textSize="20sp"
                 android:text="Glass type:"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_type"
-                />
+                app:layout_constraintTop_toBottomOf="@id/textview_cocktail_type" />
 
             <TextView
                 android:id="@+id/textview_glass_type"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
+                android:text="Glass type"
                 android:textSize="20sp"
-                android:text="Cocktails type"
-                app:layout_constraintStart_toEndOf="@id/textview_glass"
-                app:layout_constraintTop_toBottomOf="@id/textview_cocktail_type"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/textview_cocktail_type" />
 
             <TextView
                 android:id="@+id/textview_ingredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textSize="20sp"
                 android:text="Ingredients:"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_glass"
-                />
+                app:layout_constraintTop_toBottomOf="@id/textview_glass_type" />
 
 
             <TextView
@@ -165,16 +157,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textSize="20sp"
                 android:text="Cocktails ingredients"
-                app:layout_constraintStart_toEndOf="@id/textview_ingredients"
-                app:layout_constraintTop_toBottomOf="@id/textview_glass_type"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/textview_glass_type" />
 
-
-
-
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+               app:layout_constraintGuide_percent="0.31"
+/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

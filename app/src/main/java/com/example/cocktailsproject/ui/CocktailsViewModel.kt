@@ -17,6 +17,10 @@ import kotlinx.coroutines.launch
 
 const val TAG = "TAG"
 
+enum class LoadingStatus(
+
+)
+
 class CocktailsViewModel(private val repo: CocktailsRepository) : ViewModel() {
 
     private var _data = MutableLiveData<ModelRequest>()
