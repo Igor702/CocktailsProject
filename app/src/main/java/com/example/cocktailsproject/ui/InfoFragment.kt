@@ -8,8 +8,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -20,7 +23,11 @@ import com.example.cocktailsproject.models.Drinks
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.valueParameters
 
+private const val MENU_INVISIBLE = -1
+private const val MENU_VISIBLE = 1
+
 class InfoFragment : Fragment() {
+
 
     private var _binding: FragmentInfoBinding? = null
     private val binding get() = _binding!!
@@ -37,49 +44,11 @@ class InfoFragment : Fragment() {
     ): View {
         _binding = FragmentInfoBinding.inflate(inflater, container, false)
 
-
-
-        binding.apply {
-
-
-            //todo: make "load" status, because it can take some time for loading data
             viewModel.data.observe(viewLifecycleOwner, Observer {
-                if (it != null) {
-                    val drink = it.drinks.get(0)
-                    drink.apply {
-
-
-
-                        textviewCocktailName.text = strDrink
-                        textviewCocktailCategory.text = strCategory
-                        textviewCocktailType.text = strAlcoholic
-                        textviewGlassType.text = strGlass
-                        textviewIngredientsCocktail.text = getIngredients(drink)
-
-                        imageviewInfo.load(strDrinkThumb)
-                        toolbarInfo.title = textviewCocktailName.text
-
-
-
-
-
-
-
-
-
-                    }
-
-
-                } else {
-                    textviewCocktailName.text = getString(R.string.something_get_wrong)
-
-                }
-
+                //change visibility of ui and menu depend on result
+                changeVisibilityOfUi(binding, it)
 
             })
-
-
-        }
 
 
 
@@ -122,12 +91,68 @@ class InfoFragment : Fragment() {
             addToFavourites.isVisible = true
             inFavourites.isVisible = false
             return true
+        } else if (id == MENU_INVISIBLE){
+            addToFavourites.isVisible = false
+            inFavourites.isVisible = false
+        }else if (id == MENU_VISIBLE){
+            addToFavourites.isVisible = true
         }
 
         return false
 
     }
 
+    private fun changeVisibilityOfUi(binding: FragmentInfoBinding, uiState: UIState){
+        binding.apply {
+            when(uiState) {
+                is UIState.Success -> {
+                    val drink = uiState.data.drinks[0]
+                    drink.apply {
+
+                        layoutInfo.isVisible = true
+                        layoutLoading.isVisible = false
+                        layoutError.isVisible = false
+
+                        textviewCocktailName.text = strDrink
+                        textviewCocktailCategory.text = strCategory
+                        textviewCocktailType.text = strAlcoholic
+                        textviewGlassType.text = strGlass
+                        textviewIngredientsCocktail.text = getIngredients(drink)
+
+                        imageviewInfo.load(strDrinkThumb)
+                        imageviewInfo.isVisible = true
+                        gifViewInfo.isVisible = false
+
+                        setVisibilityOfMenuItems(MENU_VISIBLE)
+                    }
+                }
+
+                is UIState.Loading -> {
+                    layoutLoading.isVisible = true
+                    layoutInfo.isVisible = false
+                    setVisibilityOfMenuItems(MENU_INVISIBLE)
+
+                }
+                is UIState.Error ->{
+                    layoutLoading.isVisible = false
+                    layoutError.isVisible  = true
+                    imageviewInfo.load(R.drawable.drink_loading_error)
+                    imageviewInfo.isVisible = true
+                    gifViewInfo.isVisible = false
+                    setVisibilityOfMenuItems(MENU_INVISIBLE)
+                    btnErrorTryAgain.setOnClickListener {
+                        viewModel.reloadRemoteData()
+
+                    }
+                }
+
+
+            }
+        }
+    }
+
+
+    //transform drinks to string and filtered it
     private fun getIngredients(drinks: Drinks): String? {
         var rawString: String? = ""
         var resultString:String? =""
@@ -149,8 +174,6 @@ class InfoFragment : Fragment() {
                     resultString += ", \n"
                 }
             }
-
-
         }
         return resultString
     }

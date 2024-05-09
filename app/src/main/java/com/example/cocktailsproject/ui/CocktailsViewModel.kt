@@ -17,14 +17,16 @@ import kotlinx.coroutines.launch
 
 const val TAG = "TAG"
 
-enum class LoadingStatus(
+sealed interface UIState {
+    data class Success(val data: ModelRequest):UIState
+    object Loading:UIState
+    object Error: UIState
 
-)
-
+}
 class CocktailsViewModel(private val repo: CocktailsRepository) : ViewModel() {
 
-    private var _data = MutableLiveData<ModelRequest>()
-    val data: LiveData<ModelRequest> get() = _data
+    private var _data: MutableLiveData<UIState> = MutableLiveData(UIState.Loading)
+    val data: LiveData<UIState> get() = _data
 
 
     init {
@@ -45,10 +47,11 @@ class CocktailsViewModel(private val repo: CocktailsRepository) : ViewModel() {
 
         viewModelScope.launch {
             try {
-                _data.value = repo.getRemoteData()
+                _data.value = UIState.Success(repo.getRemoteData())
 
             } catch (e: Exception) {
                 Log.d(TAG, "vm, loadRemoteData, exception: $e")
+                _data.value = UIState.Error
             }
 
 
@@ -57,12 +60,12 @@ class CocktailsViewModel(private val repo: CocktailsRepository) : ViewModel() {
 
     }
 
-    fun getRemoteData(): String {
+    fun reloadRemoteData() {
+        loadRemoteData()
         val logInfo = _data.value.toString()
         Log.d(TAG, "vm, getRemoteData, logInfo: $logInfo")
 
 
-        return logInfo
     }
 
     companion object {

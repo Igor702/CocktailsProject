@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">CocktailsProject</string>
     <string name="something_get_wrong">Something get wrong</string>
+    <string name="we_re_loading_your_cocktail">We\'re loading your cocktail</string>
+    <string name="ingredients">Ingredients:</string>
+    <string name="glass_type">Glass type:</string>
+    <string name="type">Type:</string>
+    <string name="category">Category:</string>
+    <string name="name">Name:</string>
+    <string name="ups_something_get_wrong">Ups, something get wrong;(</string>
+    <string name="try_again">Try again!</string>
 </resources>

@@ -74,6 +74,11 @@ dependencies {
     //Coil
     implementation ("io.coil-kt:coil:1.4.0")
 
+    //Gif
+    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.28")
+
+
+
 
 
 
