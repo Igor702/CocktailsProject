@@ -1,5 +1,6 @@
 package com.example.cocktailsproject.ui
 
+import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
+import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -20,6 +22,7 @@ import coil.load
 import com.example.cocktailsproject.R
 import com.example.cocktailsproject.databinding.FragmentInfoBinding
 import com.example.cocktailsproject.models.Drinks
+import kotlin.math.abs
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.valueParameters
 
@@ -42,6 +45,7 @@ class InfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentInfoBinding.inflate(inflater, container, false)
 
             viewModel.data.observe(viewLifecycleOwner, Observer {
@@ -49,6 +53,9 @@ class InfoFragment : Fragment() {
                 changeVisibilityOfUi(binding, it)
 
             })
+        binding.refreshLayout.setOnRefreshListener {
+            viewModel.reloadRemoteData()
+        }
 
 
 
@@ -57,10 +64,14 @@ class InfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.apply {
 
             //inflate menu
             toolbarInfo.inflateMenu(R.menu.menu_info)
+
+
+
 
             //click listener for menu
             toolbarInfo.setOnMenuItemClickListener {
@@ -78,6 +89,9 @@ class InfoFragment : Fragment() {
         val menu: Menu = binding.toolbarInfo.menu
         val addToFavourites: MenuItem = menu.findItem(R.id.add_to_favourites)
         val inFavourites: MenuItem = menu.findItem(R.id.in_favourites)
+
+
+
 
         if (id == R.id.add_to_favourites) {
             Toast.makeText(requireContext(), "Added", Toast.LENGTH_SHORT).show()
@@ -124,6 +138,14 @@ class InfoFragment : Fragment() {
                         gifViewInfo.isVisible = false
 
                         setVisibilityOfMenuItems(MENU_VISIBLE)
+                        refreshLayout.isRefreshing = false
+                        appBarLayout.addOnOffsetChangedListener{
+                            appBarLayout, verticalOffset ->
+                            if (abs(verticalOffset) >= appBarLayout.totalScrollRange){
+                                refreshLayout.isEnabled = false
+                            }else refreshLayout.isEnabled = verticalOffset == 0
+
+                        }
                     }
                 }
 
@@ -131,16 +153,22 @@ class InfoFragment : Fragment() {
                     layoutLoading.isVisible = true
                     layoutInfo.isVisible = false
                     setVisibilityOfMenuItems(MENU_INVISIBLE)
+                    refreshLayout.isRefreshing = false
+
 
                 }
                 is UIState.Error ->{
                     layoutLoading.isVisible = false
                     layoutError.isVisible  = true
+                    layoutInfo.isVisible = false
                     imageviewInfo.load(R.drawable.drink_loading_error)
                     imageviewInfo.isVisible = true
                     gifViewInfo.isVisible = false
                     setVisibilityOfMenuItems(MENU_INVISIBLE)
+                    refreshLayout.isRefreshing = false
+
                     btnErrorTryAgain.setOnClickListener {
+                        refreshLayout.isRefreshing = true
                         viewModel.reloadRemoteData()
 
                     }
@@ -184,3 +212,4 @@ class InfoFragment : Fragment() {
         _binding = null
     }
 }
+

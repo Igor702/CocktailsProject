@@ -6,7 +6,8 @@
         android:icon="@drawable/add_to_favorites_50"
         android:title="Add to favourites"
         app:showAsAction="always"
-        android:visible="true"/>
+        android:visible="true"
+        />
     <item
         android:id="@+id/in_favourites"
         android:icon="@drawable/in_favorites_50"
@@ -17,3 +18,4 @@
 
 
 </menu>
+
