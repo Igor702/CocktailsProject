@@ -80,6 +80,13 @@ dependencies {
     //SwipeToRefresh
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
 
+    //ViewPager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+
+    //DataStorePreferences
+//    implementation("androidx.datastore:datastore-preferences:1.1.1")
+
+
 
 
 

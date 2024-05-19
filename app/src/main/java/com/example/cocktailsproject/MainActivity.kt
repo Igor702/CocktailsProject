@@ -1,9 +1,11 @@
 package com.example.cocktailsproject
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.example.cocktailsproject.ui.TAG
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,4 +21,6 @@ class MainActivity : AppCompatActivity() {
 
 //        setupActionBarWithNavController(navController)
     }
+
+
 }

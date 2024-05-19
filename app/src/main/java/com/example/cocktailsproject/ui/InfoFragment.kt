@@ -46,7 +46,7 @@ class InfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentInfoBinding.inflate(inflater, container, false)
+         _binding = FragmentInfoBinding.inflate(inflater, container, false)
 
             viewModel.data.observe(viewLifecycleOwner, Observer {
                 //change visibility of ui and menu depend on result
@@ -170,6 +170,7 @@ class InfoFragment : Fragment() {
                     btnErrorTryAgain.setOnClickListener {
                         refreshLayout.isRefreshing = true
                         viewModel.reloadRemoteData()
+
 
                     }
                 }

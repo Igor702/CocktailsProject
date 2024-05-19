@@ -2,10 +2,22 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/infoFragment">
+    app:startDestination="@id/cocktailsOnboardingFragment">
 
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.example.cocktailsproject.ui.InfoFragment"
         android:label="InfoFragment" />
+    <fragment
+        android:id="@+id/cocktailsOnboardingFragment"
+        android:name="com.example.cocktailsproject.ui.CocktailsOnboardingFragment"
+        android:label="CocktailsOnboardingFragment" >
+        <action
+            android:id="@+id/action_cocktailsOnboardingFragment_to_infoFragment"
+            app:destination="@id/infoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboardingObjectFragment"
+        android:name="com.example.cocktailsproject.ui.OnboardingObjectFragment"
+        android:label="OnboardingObjectFragment" />
 </navigation>

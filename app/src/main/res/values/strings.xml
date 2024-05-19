@@ -9,4 +9,11 @@
     <string name="name">Name:</string>
     <string name="ups_something_get_wrong">Ups, something get wrong;(</string>
     <string name="try_again">Try again!</string>
+    <string name="onboarding_key_name">onboarding_key_name</string>
+    <string name="onboarding_key_value">onboarding_key_value</string>
+    <string name="skip">Skip</string>
+    <string name="go_to_cocktails">Go to cocktails!</string>
+    <string name="onboarding_favourite">Add the cocktail to your favourite</string>
+    <string name="onboarding_swipe">Swipe for loading a new cocktail</string>
+    <string name="onboarding_error">When something get wrong - try again</string>
 </resources>
