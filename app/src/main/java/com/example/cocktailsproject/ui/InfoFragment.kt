@@ -1,30 +1,19 @@
 package com.example.cocktailsproject.ui
 
-import android.app.Activity
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintSet.Layout
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
-import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import coil.load
 import com.example.cocktailsproject.R
 import com.example.cocktailsproject.databinding.FragmentInfoBinding
-import com.example.cocktailsproject.models.Drinks
 import kotlin.math.abs
-import kotlin.reflect.KProperty1
-import kotlin.reflect.full.valueParameters
 
 private const val MENU_INVISIBLE = -1
 private const val MENU_VISIBLE = 1
@@ -46,13 +35,16 @@ class InfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-         _binding = FragmentInfoBinding.inflate(inflater, container, false)
+        _binding = FragmentInfoBinding.inflate(inflater, container, false)
 
-            viewModel.data.observe(viewLifecycleOwner, Observer {
-                //change visibility of ui and menu depend on result
-                changeVisibilityOfUi(binding, it)
+        //updating UI-elements - refreshing direct in fragment
+        viewModel.data.observe(viewLifecycleOwner) {
+            //change visibility of ui and menu depend on result
+            changeVisibilityOfUi(binding, it)
 
-            })
+        }
+
+        //reloading data of UI - handle in viewModel
         binding.refreshLayout.setOnRefreshListener {
             viewModel.reloadRemoteData()
         }
@@ -71,8 +63,6 @@ class InfoFragment : Fragment() {
             toolbarInfo.inflateMenu(R.menu.menu_info)
 
 
-
-
             //click listener for menu
             toolbarInfo.setOnMenuItemClickListener {
 
@@ -80,7 +70,6 @@ class InfoFragment : Fragment() {
 
             }
         }
-
 
 
     }
@@ -105,10 +94,10 @@ class InfoFragment : Fragment() {
             addToFavourites.isVisible = true
             inFavourites.isVisible = false
             return true
-        } else if (id == MENU_INVISIBLE){
+        } else if (id == MENU_INVISIBLE) {
             addToFavourites.isVisible = false
             inFavourites.isVisible = false
-        }else if (id == MENU_VISIBLE){
+        } else if (id == MENU_VISIBLE) {
             addToFavourites.isVisible = true
         }
 
@@ -116,11 +105,11 @@ class InfoFragment : Fragment() {
 
     }
 
-    private fun changeVisibilityOfUi(binding: FragmentInfoBinding, uiState: UIState){
+    private fun changeVisibilityOfUi(binding: FragmentInfoBinding, uiState: UIState) {
         binding.apply {
-            when(uiState) {
+            when (uiState) {
                 is UIState.Success -> {
-                    val drink = uiState.data.drinks[0]
+                    val drink = uiState.data
                     drink.apply {
 
                         layoutInfo.isVisible = true
@@ -131,7 +120,7 @@ class InfoFragment : Fragment() {
                         textviewCocktailCategory.text = strCategory
                         textviewCocktailType.text = strAlcoholic
                         textviewGlassType.text = strGlass
-                        textviewIngredientsCocktail.text = getIngredients(drink)
+                        textviewIngredientsCocktail.text = strIngredients
 
                         imageviewInfo.load(strDrinkThumb)
                         imageviewInfo.isVisible = true
@@ -139,11 +128,10 @@ class InfoFragment : Fragment() {
 
                         setVisibilityOfMenuItems(MENU_VISIBLE)
                         refreshLayout.isRefreshing = false
-                        appBarLayout.addOnOffsetChangedListener{
-                            appBarLayout, verticalOffset ->
-                            if (abs(verticalOffset) >= appBarLayout.totalScrollRange){
+                        appBarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
+                            if (abs(verticalOffset) >= appBarLayout.totalScrollRange) {
                                 refreshLayout.isEnabled = false
-                            }else refreshLayout.isEnabled = verticalOffset == 0
+                            } else refreshLayout.isEnabled = verticalOffset == 0
 
                         }
                     }
@@ -157,9 +145,10 @@ class InfoFragment : Fragment() {
 
 
                 }
-                is UIState.Error ->{
+
+                is UIState.Error -> {
                     layoutLoading.isVisible = false
-                    layoutError.isVisible  = true
+                    layoutError.isVisible = true
                     layoutInfo.isVisible = false
                     imageviewInfo.load(R.drawable.drink_loading_error)
                     imageviewInfo.isVisible = true
@@ -181,31 +170,7 @@ class InfoFragment : Fragment() {
     }
 
 
-    //transform drinks to string and filtered it
-    private fun getIngredients(drinks: Drinks): String? {
-        var rawString: String? = ""
-        var resultString:String? =""
-        drinks.apply {
-            rawString = "$strIngredient1, $strIngredient2, $strIngredient3, $strIngredient4," +
-                    " $strIngredient5, $strIngredient6, $strIngredient7, $strIngredient7," +
-                    " $strIngredient8, $strIngredient9, $strIngredient10, $strIngredient11, " +
-                    "$strIngredient12, $strIngredient13, $strIngredient14, $strIngredient15"
 
-        }
-      val list =  rawString?.split(", ")
-        if (list != null) {
-            for (i in list.indices){
-                if (list[i] != "null"){
-                    resultString += list[i]
-
-                }
-                if (i!= 15 && list[i+1] != "null"){
-                    resultString += ", \n"
-                }
-            }
-        }
-        return resultString
-    }
 
 
     override fun onDestroy() {

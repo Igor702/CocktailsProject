@@ -1,13 +1,13 @@
 package com.example.cocktailsproject.data.remote
 
 import android.util.Log
-import com.example.cocktailsproject.models.ModelRequest
+import com.example.cocktailsproject.models.CocktailRequest
 import com.example.cocktailsproject.ui.TAG
 
 
 class RemoteDataStore {
 
-    suspend fun getRandomCocktail(): ModelRequest {
+    suspend fun getRandomCocktail(): CocktailRequest {
 
         val result = ApiClient.apiService.getRandomCocktail()
 

@@ -1,0 +1,43 @@
+package com.example.cocktailsproject.models
+
+
+data class Cocktail(
+    var idDrink: String? = null,
+    var strDrink: String? = null,
+    var strDrinkAlternate: String? = null,
+    var strTags: String? = null,
+    var strVideo: String? = null,
+    var strCategory: String? = null,
+    var strIBA: String? = null,
+    var strAlcoholic: String? = null,
+    var strGlass: String? = null,
+    var strInstructions: String? = null,
+    var strInstructionsES: String? = null,
+    var strInstructionsDE: String? = null,
+    var strInstructionsFR: String? = null,
+    var strInstructionsIT: String? = null,
+    var strInstructionsZHHANS: String? = null,
+    var strInstructionsZHHANT: String? = null,
+    var strDrinkThumb: String? = null,
+    var strIngredients: String? = null,
+    var strMeasure1: String? = null,
+    var strMeasure2: String? = null,
+    var strMeasure3: String? = null,
+    var strMeasure4: String? = null,
+    var strMeasure5: String? = null,
+    var strMeasure6: String? = null,
+    var strMeasure7: String? = null,
+    var strMeasure8: String? = null,
+    var strMeasure9: String? = null,
+    var strMeasure10: String? = null,
+    var strMeasure11: String? = null,
+    var strMeasure12: String? = null,
+    var strMeasure13: String? = null,
+    var strMeasure14: String? = null,
+    var strMeasure15: String? = null,
+    var strImageSource: String? = null,
+    var strImageAttribution: String? = null,
+    var strCreativeCommonsConfirmed: String? = null,
+    var dateModified: String? = null
+) {
+}

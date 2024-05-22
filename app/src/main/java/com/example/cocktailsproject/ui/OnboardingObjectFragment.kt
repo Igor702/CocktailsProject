@@ -10,7 +10,6 @@ import com.example.cocktailsproject.R
 import com.example.cocktailsproject.databinding.FragmentOnboardingObjectBinding
 import com.example.cocktailsproject.models.Onboarding
 
-const val ARG_OBJECT = "object"
 
 
 class OnboardingObjectFragment(private val position: Int):Fragment() {
@@ -33,11 +32,7 @@ class OnboardingObjectFragment(private val position: Int):Fragment() {
         return binding?.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        arguments?.takeIf { it.containsKey(ARG_OBJECT) }?.apply {
-            binding?.onboardingTitle?.text = getInt(ARG_OBJECT).toString()
-        }
-    }
+
 
     override fun onDestroy() {
         super.onDestroy()

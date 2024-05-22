@@ -51,9 +51,9 @@ class CocktailsOnboardingFragment:Fragment(){
 
 
         adapter = CocktailsOnboardingAdapter(this)
-            pager = binding!!.pagerOnboardings
-         pager.adapter = adapter
-            TabLayoutMediator(binding!!.onboardingTabLayout, pager){ tab, position -> }.attach()
+        pager = binding!!.pagerOnboardings
+        pager.adapter = adapter
+        TabLayoutMediator(binding!!.onboardingTabLayout, pager){ tab, position -> }.attach()
 
 
         return binding?.root
