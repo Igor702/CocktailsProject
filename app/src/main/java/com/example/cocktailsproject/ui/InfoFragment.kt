@@ -11,7 +11,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
+import com.example.cocktailsproject.AppBarCollapsed
 import com.example.cocktailsproject.R
+import com.example.cocktailsproject.ServiceLocator
 import com.example.cocktailsproject.databinding.FragmentInfoBinding
 import kotlin.math.abs
 
@@ -25,7 +27,7 @@ class InfoFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: CocktailsViewModel by viewModels {
-        CocktailsViewModel.Factory
+        CocktailsViewModel.CocktailsViewModelFactory(ServiceLocator.provideCocktailsRepository())
     }
 
 
@@ -37,6 +39,8 @@ class InfoFragment : Fragment() {
 
         _binding = FragmentInfoBinding.inflate(inflater, container, false)
 
+        viewModel.loadRemoteData()
+
         //updating UI-elements - refreshing direct in fragment
         viewModel.data.observe(viewLifecycleOwner) {
             //change visibility of ui and menu depend on result
@@ -47,6 +51,7 @@ class InfoFragment : Fragment() {
         //reloading data of UI - handle in viewModel
         binding.refreshLayout.setOnRefreshListener {
             viewModel.reloadRemoteData()
+
         }
 
 
@@ -77,7 +82,7 @@ class InfoFragment : Fragment() {
     private fun setVisibilityOfMenuItems(id: Int): Boolean {
         val menu: Menu = binding.toolbarInfo.menu
         val addToFavourites: MenuItem = menu.findItem(R.id.add_to_favourites)
-        val inFavourites: MenuItem = menu.findItem(R.id.in_favourites)
+        val inFavourites: MenuItem = menu.findItem(R.id.remove_from_favourites)
 
 
 
@@ -88,7 +93,7 @@ class InfoFragment : Fragment() {
             inFavourites.isVisible = true
 
             return true
-        } else if (id == R.id.in_favourites) {
+        } else if (id == R.id.remove_from_favourites) {
 
             Toast.makeText(requireContext(), "Removed", Toast.LENGTH_SHORT).show()
             addToFavourites.isVisible = true
@@ -99,6 +104,8 @@ class InfoFragment : Fragment() {
             inFavourites.isVisible = false
         } else if (id == MENU_VISIBLE) {
             addToFavourites.isVisible = true
+            inFavourites.isVisible = false
+
         }
 
         return false
@@ -123,6 +130,7 @@ class InfoFragment : Fragment() {
                         textviewIngredientsCocktail.text = strIngredients
 
                         imageviewInfo.load(strDrinkThumb)
+                        imageviewInfo.tag = null
                         imageviewInfo.isVisible = true
                         gifViewInfo.isVisible = false
 
@@ -131,9 +139,16 @@ class InfoFragment : Fragment() {
                         appBarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
                             if (abs(verticalOffset) >= appBarLayout.totalScrollRange) {
                                 refreshLayout.isEnabled = false
-                            } else refreshLayout.isEnabled = verticalOffset == 0
+                                AppBarCollapsed.setRefreshing(refreshLayout.isEnabled)
+
+                            } else {
+                                refreshLayout.isEnabled = verticalOffset == 0
+                                AppBarCollapsed.setRefreshing(refreshLayout.isEnabled)
+                            }
+
 
                         }
+                        appBarLayout.totalScrollRange
                     }
                 }
 
@@ -151,6 +166,7 @@ class InfoFragment : Fragment() {
                     layoutError.isVisible = true
                     layoutInfo.isVisible = false
                     imageviewInfo.load(R.drawable.drink_loading_error)
+                    imageviewInfo.tag = R.drawable.drink_loading_error
                     imageviewInfo.isVisible = true
                     gifViewInfo.isVisible = false
                     setVisibilityOfMenuItems(MENU_INVISIBLE)
@@ -170,12 +186,10 @@ class InfoFragment : Fragment() {
     }
 
 
-
-
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 }
+
 

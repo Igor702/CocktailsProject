@@ -83,9 +83,27 @@ dependencies {
     //ViewPager2
     implementation("androidx.viewpager2:viewpager2:1.0.0")
 
-    //DataStorePreferences
-//    implementation("androidx.datastore:datastore-preferences:1.1.1")
 
+
+    testImplementation ("org.hamcrest:hamcrest-all:1.3")
+
+    // AndroidX Test - JVM testing
+    testImplementation ("androidx.test.ext:junit-ktx:1.1.5")
+    testImplementation ("androidx.test:core-ktx:1.5.0")
+    testImplementation ("org.robolectric:robolectric:4.12.2")
+
+    testImplementation ("androidx.arch.core:core-testing:2.2.0")
+
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+
+
+    androidTestImplementation ("junit:junit:4.13.2")
+    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+
+
+    debugImplementation ("androidx.fragment:fragment-testing:1.7.1")
+
+    implementation ("androidx.test:core-ktx:1.5.0")
 
 
 

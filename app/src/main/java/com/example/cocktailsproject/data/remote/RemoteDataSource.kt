@@ -5,9 +5,9 @@ import com.example.cocktailsproject.models.CocktailRequest
 import com.example.cocktailsproject.ui.TAG
 
 
-class RemoteDataStore {
+class RemoteDataSource: IRemoteDataSource {
 
-    suspend fun getRandomCocktail(): CocktailRequest {
+    override suspend fun getRandomCocktail(): CocktailRequest {
 
         val result = ApiClient.apiService.getRandomCocktail()
 

@@ -6,8 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.CreationExtras
-import com.example.cocktailsproject.data.CocktailsRepository
+import com.example.cocktailsproject.data.ICocktailsRepository
 import com.example.cocktailsproject.models.Cocktail
 import com.example.cocktailsproject.models.toCocktail
 import kotlinx.coroutines.launch
@@ -20,19 +19,17 @@ sealed interface UIState {
     object Error: UIState
 
 }
-class CocktailsViewModel(private val repo: CocktailsRepository) : ViewModel() {
+class CocktailsViewModel(private val repo: ICocktailsRepository) : ViewModel() {
 
     private var _data: MutableLiveData<UIState> = MutableLiveData(UIState.Loading)
     val data: LiveData<UIState> get() = _data
 
 
-    init {
-        loadRemoteData()
-    }
 
 
 
-    private fun loadRemoteData() {
+
+    fun loadRemoteData() {
 
         viewModelScope.launch {
             try {
@@ -57,24 +54,19 @@ class CocktailsViewModel(private val repo: CocktailsRepository) : ViewModel() {
 
     }
 
-    companion object {
-
-        val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(
-                modelClass: Class<T>,
-                extras: CreationExtras
-            ): T {
-
-                val repo = CocktailsRepository()
-
-                return CocktailsViewModel(repo) as T
-            }
+    @Suppress("UNCHECKED_CAST")
+    class CocktailsViewModelFactory (
+        private val repo: ICocktailsRepository
+    ) : ViewModelProvider.NewInstanceFactory() {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return CocktailsViewModel(repo) as T
         }
+
+
+    }
     }
 
 
 
 
 
-}

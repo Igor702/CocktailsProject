@@ -4,14 +4,14 @@
 
     <item android:id="@+id/add_to_favourites"
         android:icon="@drawable/add_to_favorites_50"
-        android:title="Add to favourites"
+        android:title="@string/add_to_favourites_menu_item"
         app:showAsAction="always"
         android:visible="true"
         />
     <item
-        android:id="@+id/in_favourites"
+        android:id="@+id/remove_from_favourites"
         android:icon="@drawable/in_favorites_50"
-        android:title="In favourites"
+        android:title="@string/in_favourites_menu_item"
         app:showAsAction="always"
         android:visible="false"/>
 
