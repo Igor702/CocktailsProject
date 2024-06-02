@@ -3,7 +3,6 @@ package com.example.cocktailsproject.ui
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,13 +13,13 @@ import com.example.cocktailsproject.R
 import com.example.cocktailsproject.databinding.FragmentOnboardingBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
-class CocktailsOnboardingFragment:Fragment(){
+class CocktailsOnboardingFragment : Fragment() {
 
     private var _binding: FragmentOnboardingBinding? = null
     private val binding get() = _binding
-    private lateinit var sharedPreferences:SharedPreferences
+    private lateinit var sharedPreferences: SharedPreferences
 
-    private lateinit var pager:ViewPager2
+    private lateinit var pager: ViewPager2
     private lateinit var adapter: CocktailsOnboardingAdapter
 
 
@@ -30,35 +29,33 @@ class CocktailsOnboardingFragment:Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentOnboardingBinding.inflate(inflater, container, false)
-        sharedPreferences = this.requireActivity().getSharedPreferences(getString(R.string.onboarding_key_name), Context.MODE_PRIVATE)
+        sharedPreferences = this.requireActivity()
+            .getSharedPreferences(getString(R.string.onboarding_key_name), Context.MODE_PRIVATE)
 
+        val onboardingWasShowed: Boolean =
+            sharedPreferences.getBoolean(getString(R.string.onboarding_key_value), false)
 
-        val onboardingWasShowed:Boolean = sharedPreferences.getBoolean(getString(R.string.onboarding_key_value), false)
-        Log.d(TAG, "onboarding check: $onboardingWasShowed")
-        if (onboardingWasShowed){
+        if (onboardingWasShowed) {
+
             findNavController().navigate(R.id.action_cocktailsOnboardingFragment_to_infoFragment)
         }
 
-        binding?.btnOnboardingGo?.setOnClickListener {
+        binding?.btnOnboardingGoToCocktails?.setOnClickListener {
+            sharedPreferences.edit()?.putBoolean(getString(R.string.onboarding_key_value), true)
+                ?.apply()
             findNavController().navigate(R.id.action_cocktailsOnboardingFragment_to_infoFragment)
-            sharedPreferences.edit().putBoolean(getString(R.string.onboarding_key_value), true).apply()
-
         }
-
-
-
 
 
 
         adapter = CocktailsOnboardingAdapter(this)
         pager = binding!!.pagerOnboardings
         pager.adapter = adapter
-        TabLayoutMediator(binding!!.onboardingTabLayout, pager){ tab, position -> }.attach()
+        TabLayoutMediator(binding!!.onboardingTabLayout, pager) { tab, position -> }.attach()
 
 
         return binding?.root
     }
-
 
 
     override fun onDestroy() {

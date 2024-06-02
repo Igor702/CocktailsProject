@@ -30,39 +30,43 @@ import org.junit.runner.RunWith
 
 @MediumTest
 @RunWith(AndroidJUnit4::class)
-class InfoFragmentTest{
+class InfoFragmentTest {
     private lateinit var repository: FakeAndroidCocktailsRepository
+
     @Before
-    fun setUpRepository(){
+    fun setUpRepository() {
 
         repository = FakeAndroidCocktailsRepository()
 
         ServiceLocator.setTestRepository(repository)
 
     }
+
     @After
-    fun cleanUpRepository(){
+    fun cleanUpRepository() {
         ServiceLocator.resetRepository()
     }
 
 
     @Test
-    fun uiStateSuccess_allViewIsVisible(){
-        val cocktailRequest = CocktailRequest(listOf<DrinkRawData>(
-            DrinkRawData(
-            idDrink = "id1",
-            strDrink = "YellowBird",
-                strCategory = "Cocktail",
-                strGlass = "Cocktail glass",
-                strAlcoholic = "Alcoholic",
-                strIngredient1 = "Vodka"
+    fun uiStateSuccess_allViewIsVisible() {
+        val cocktailRequest = CocktailRequest(
+            listOf<DrinkRawData>(
+                DrinkRawData(
+                    idDrink = "id1",
+                    strDrink = "YellowBird",
+                    strCategory = "Cocktail",
+                    strGlass = "Cocktail glass",
+                    strAlcoholic = "Alcoholic",
+                    strIngredient1 = "Vodka"
+                )
+            )
         )
-        ))
         repository.setCocktail(cocktailRequest)
 
 
 
-        launchFragmentInContainer<InfoFragment>( Bundle(),R.style.Theme_CocktailsProject)
+        launchFragmentInContainer<InfoFragment>(Bundle(), R.style.Theme_CocktailsProject)
 
         onView(withId(R.id.textview_name))
             .check(matches(isDisplayed()))
@@ -109,27 +113,25 @@ class InfoFragmentTest{
     }
 
 
-
-
-
-
     @Test
-    fun uiStateSuccess_addToFavouritesButton_removeFromFavourites_visibilityChanges(){
-        val cocktailRequest = CocktailRequest(listOf<DrinkRawData>(
-            DrinkRawData(
-                idDrink = "id1",
-                strDrink = "YellowBird",
-                strCategory = "Cocktail",
-                strGlass = "Cocktail glass",
-                strAlcoholic = "Alcoholic",
-                strIngredient1 = "Vodka"
+    fun uiStateSuccess_addToFavouritesButton_removeFromFavourites_visibilityChanges() {
+        val cocktailRequest = CocktailRequest(
+            listOf<DrinkRawData>(
+                DrinkRawData(
+                    idDrink = "id1",
+                    strDrink = "YellowBird",
+                    strCategory = "Cocktail",
+                    strGlass = "Cocktail glass",
+                    strAlcoholic = "Alcoholic",
+                    strIngredient1 = "Vodka"
+                )
             )
-        ))
+        )
         repository.setCocktail(cocktailRequest)
 
 
 
-        launchFragmentInContainer<InfoFragment>( Bundle(),R.style.Theme_CocktailsProject)
+        launchFragmentInContainer<InfoFragment>(Bundle(), R.style.Theme_CocktailsProject)
 
         onView(withId(R.id.add_to_favourites))
             .check(matches(isDisplayed()))
@@ -154,35 +156,39 @@ class InfoFragmentTest{
     }
 
     @Test
-    fun uiStateSuccess_swipeToRefresh_loadNewData(){
-        val cocktailRequest = CocktailRequest(listOf<DrinkRawData>(
-            DrinkRawData(
-                idDrink = "id1",
-                strDrink = "YellowBird",
-                strCategory = "Cocktail",
-                strGlass = "Cocktail glass",
-                strAlcoholic = "Alcoholic",
-                strIngredient1 = "Vodka"
+    fun uiStateSuccess_swipeToRefresh_loadNewData() {
+        val cocktailRequest = CocktailRequest(
+            listOf<DrinkRawData>(
+                DrinkRawData(
+                    idDrink = "id1",
+                    strDrink = "YellowBird",
+                    strCategory = "Cocktail",
+                    strGlass = "Cocktail glass",
+                    strAlcoholic = "Alcoholic",
+                    strIngredient1 = "Vodka"
+                )
             )
-        ))
+        )
         repository.setCocktail(cocktailRequest)
 
 
 
-        launchFragmentInContainer<InfoFragment>( Bundle(),R.style.Theme_CocktailsProject)
+        launchFragmentInContainer<InfoFragment>(Bundle(), R.style.Theme_CocktailsProject)
 
         onView(withId(R.id.textview_cocktail_name)).check(matches(withText("YellowBird")))
-        val newCocktailRequest = CocktailRequest(listOf<DrinkRawData>(
-            DrinkRawData(
-                idDrink = "id2",
-                strDrink = "Bloody Mary",
-                strCategory = "Cocktail",
-                strGlass = "Cocktail glass",
-                strAlcoholic = "Alcoholic",
-                strIngredient1 = "Tomato Juice",
-                strIngredient2 = "Vodka"
+        val newCocktailRequest = CocktailRequest(
+            listOf<DrinkRawData>(
+                DrinkRawData(
+                    idDrink = "id2",
+                    strDrink = "Bloody Mary",
+                    strCategory = "Cocktail",
+                    strGlass = "Cocktail glass",
+                    strAlcoholic = "Alcoholic",
+                    strIngredient1 = "Tomato Juice",
+                    strIngredient2 = "Vodka"
+                )
             )
-        ))
+        )
         repository.setCocktail(newCocktailRequest)
 
 
@@ -191,41 +197,43 @@ class InfoFragmentTest{
         onView(withId(R.id.textview_cocktail_name)).check(matches(withText("Bloody Mary")))
 
 
-
-
     }
 
     @Test
-    fun uiStateSuccess_swipeToRefresh_changeRemoveFromFavouritesToAddToFavourites(){
-        val cocktailRequest = CocktailRequest(listOf<DrinkRawData>(
-            DrinkRawData(
-                idDrink = "id1",
-                strDrink = "YellowBird",
-                strCategory = "Cocktail",
-                strGlass = "Cocktail glass",
-                strAlcoholic = "Alcoholic",
-                strIngredient1 = "Vodka"
+    fun uiStateSuccess_swipeToRefresh_changeRemoveFromFavouritesToAddToFavourites() {
+        val cocktailRequest = CocktailRequest(
+            listOf<DrinkRawData>(
+                DrinkRawData(
+                    idDrink = "id1",
+                    strDrink = "YellowBird",
+                    strCategory = "Cocktail",
+                    strGlass = "Cocktail glass",
+                    strAlcoholic = "Alcoholic",
+                    strIngredient1 = "Vodka"
+                )
             )
-        ))
+        )
         repository.setCocktail(cocktailRequest)
 
 
 
-        launchFragmentInContainer<InfoFragment>( Bundle(),R.style.Theme_CocktailsProject)
+        launchFragmentInContainer<InfoFragment>(Bundle(), R.style.Theme_CocktailsProject)
 
         onView(withId(R.id.add_to_favourites))
             .perform(click())
-        val newCocktailRequest = CocktailRequest(listOf<DrinkRawData>(
-            DrinkRawData(
-                idDrink = "id2",
-                strDrink = "Bloody Mary",
-                strCategory = "Cocktail",
-                strGlass = "Cocktail glass",
-                strAlcoholic = "Alcoholic",
-                strIngredient1 = "Tomato Juice",
-                strIngredient2 = "Vodka"
+        val newCocktailRequest = CocktailRequest(
+            listOf<DrinkRawData>(
+                DrinkRawData(
+                    idDrink = "id2",
+                    strDrink = "Bloody Mary",
+                    strCategory = "Cocktail",
+                    strGlass = "Cocktail glass",
+                    strAlcoholic = "Alcoholic",
+                    strIngredient1 = "Tomato Juice",
+                    strIngredient2 = "Vodka"
+                )
             )
-        ))
+        )
         repository.setCocktail(newCocktailRequest)
 
 
@@ -236,32 +244,31 @@ class InfoFragmentTest{
     }
 
     @Test
-    fun uiStateSuccess_swipeUpDown_swipeToRefreshOnlyFullInScreen(){
+    fun uiStateSuccess_swipeUpDown_swipeToRefreshOnlyFullInScreen() {
 
-        val cocktailRequest = CocktailRequest(listOf<DrinkRawData>(
-            DrinkRawData(
-                idDrink = "id1",
-                strDrink = "YellowBird",
-                strCategory = "Cocktail",
-                strGlass = "Cocktail glass",
-                strAlcoholic = "Alcoholic",
-                strIngredient1 = "Vodka"
+        val cocktailRequest = CocktailRequest(
+            listOf<DrinkRawData>(
+                DrinkRawData(
+                    idDrink = "id1",
+                    strDrink = "YellowBird",
+                    strCategory = "Cocktail",
+                    strGlass = "Cocktail glass",
+                    strAlcoholic = "Alcoholic",
+                    strIngredient1 = "Vodka"
+                )
             )
-        ))
+        )
         repository.setCocktail(cocktailRequest)
 
 
 
-        launchFragmentInContainer<InfoFragment>( Bundle(),R.style.Theme_CocktailsProject)
+        launchFragmentInContainer<InfoFragment>(Bundle(), R.style.Theme_CocktailsProject)
 
         onView(withId(R.id.refresh_layout))
             .perform(swipeUp())
-        Thread.sleep(2000)
 
         onView(withId(R.id.app_bar_layout))
             .check(matches(not(isSwipeToRefreshAvailable())))
-        Thread.sleep(2000)
-
         onView(withId(R.id.refresh_layout)).perform(swipeDown())
 
         onView(withId(R.id.app_bar_layout))
@@ -269,21 +276,23 @@ class InfoFragmentTest{
     }
 
     @Test
-    fun uiStateLoading_appropriateUiElementsAreVisible(){
-        val cocktailRequest = CocktailRequest(listOf<DrinkRawData>(
-            DrinkRawData(
-                idDrink = "id1",
-                strDrink = "YellowBird",
-                strCategory = "Cocktail",
-                strGlass = "Cocktail glass",
-                strIngredient1 = "Vodka"
+    fun uiStateLoading_appropriateUiElementsAreVisible() {
+        val cocktailRequest = CocktailRequest(
+            listOf<DrinkRawData>(
+                DrinkRawData(
+                    idDrink = "id1",
+                    strDrink = "YellowBird",
+                    strCategory = "Cocktail",
+                    strGlass = "Cocktail glass",
+                    strIngredient1 = "Vodka"
+                )
             )
-        ))
+        )
         repository.setCocktail(cocktailRequest)
 
         repository.setDelayForLoadingTesting(true)
 
-        launchFragmentInContainer<InfoFragment>( Bundle(),R.style.Theme_CocktailsProject)
+        launchFragmentInContainer<InfoFragment>(Bundle(), R.style.Theme_CocktailsProject)
 
         onView(withId(R.id.tv_loading_cocktail))
             .check(matches(isDisplayed()))
@@ -295,12 +304,12 @@ class InfoFragmentTest{
             .check(doesNotExist())
 
     }
+
     @Test
-    fun uiStateError_errorUiElementsIsVisible(){
+    fun uiStateError_errorUiElementsIsVisible() {
 
 
-
-        launchFragmentInContainer<InfoFragment>( Bundle(),R.style.Theme_CocktailsProject)
+        launchFragmentInContainer<InfoFragment>(Bundle(), R.style.Theme_CocktailsProject)
 
         onView(withId(R.id.btn_error_try_again)).check(matches(isDisplayed()))
 
@@ -321,20 +330,22 @@ class InfoFragmentTest{
     }
 
     @Test
-    fun uiStateError_btnTryAgain_loadData(){
-        launchFragmentInContainer<InfoFragment>( Bundle(),R.style.Theme_CocktailsProject)
+    fun uiStateError_btnTryAgain_loadData() {
+        launchFragmentInContainer<InfoFragment>(Bundle(), R.style.Theme_CocktailsProject)
 
-        val newCocktailRequest = CocktailRequest(listOf<DrinkRawData>(
-            DrinkRawData(
-                idDrink = "id2",
-                strDrink = "Bloody Mary",
-                strCategory = "Cocktail",
-                strGlass = "Cocktail glass",
-                strAlcoholic = "Alcoholic",
-                strIngredient1 = "Tomato Juice",
-                strIngredient2 = "Vodka"
+        val newCocktailRequest = CocktailRequest(
+            listOf<DrinkRawData>(
+                DrinkRawData(
+                    idDrink = "id2",
+                    strDrink = "Bloody Mary",
+                    strCategory = "Cocktail",
+                    strGlass = "Cocktail glass",
+                    strAlcoholic = "Alcoholic",
+                    strIngredient1 = "Tomato Juice",
+                    strIngredient2 = "Vodka"
+                )
             )
-        ))
+        )
         repository.setCocktail(newCocktailRequest)
 
 
@@ -345,20 +356,22 @@ class InfoFragmentTest{
     }
 
     @Test
-    fun uiStateError_swipeToRefresh_loadData(){
-        launchFragmentInContainer<InfoFragment>( Bundle(),R.style.Theme_CocktailsProject)
+    fun uiStateError_swipeToRefresh_loadData() {
+        launchFragmentInContainer<InfoFragment>(Bundle(), R.style.Theme_CocktailsProject)
 
-        val newCocktailRequest = CocktailRequest(listOf<DrinkRawData>(
-            DrinkRawData(
-                idDrink = "id2",
-                strDrink = "Bloody Mary",
-                strCategory = "Cocktail",
-                strGlass = "Cocktail glass",
-                strAlcoholic = "Alcoholic",
-                strIngredient1 = "Tomato Juice",
-                strIngredient2 = "Vodka"
+        val newCocktailRequest = CocktailRequest(
+            listOf<DrinkRawData>(
+                DrinkRawData(
+                    idDrink = "id2",
+                    strDrink = "Bloody Mary",
+                    strCategory = "Cocktail",
+                    strGlass = "Cocktail glass",
+                    strAlcoholic = "Alcoholic",
+                    strIngredient1 = "Tomato Juice",
+                    strIngredient2 = "Vodka"
+                )
             )
-        ))
+        )
         repository.setCocktail(newCocktailRequest)
 
 
@@ -369,5 +382,5 @@ class InfoFragmentTest{
     }
 
 
-    }
+}
 

@@ -6,15 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import coil.load
-import com.example.cocktailsproject.R
+import com.example.cocktailsproject.PagingData.listOfOnboardings
 import com.example.cocktailsproject.databinding.FragmentOnboardingObjectBinding
-import com.example.cocktailsproject.models.Onboarding
 
 
+class OnboardingObjectFragment(private val position: Int) : Fragment() {
 
-class OnboardingObjectFragment(private val position: Int):Fragment() {
-
-    private var _binding:FragmentOnboardingObjectBinding? = null
+    private var _binding: FragmentOnboardingObjectBinding? = null
     private val binding get() = _binding
 
 
@@ -33,19 +31,10 @@ class OnboardingObjectFragment(private val position: Int):Fragment() {
     }
 
 
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 
-
-    companion object{
-        val listOfOnboardings = listOf<Onboarding>(
-            Onboarding(R.drawable.onboarding_favourites, R.string.onboarding_favourite),
-            Onboarding(R.drawable.onboarding_swipe, R.string.onboarding_swipe),
-            Onboarding(R.drawable.onboarding_error, R.string.onboarding_error)
-        )
-    }
 
 }

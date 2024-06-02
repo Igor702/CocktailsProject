@@ -39,5 +39,4 @@ data class Cocktail(
     var strImageAttribution: String? = null,
     var strCreativeCommonsConfirmed: String? = null,
     var dateModified: String? = null
-) {
-}
+)

@@ -105,6 +105,21 @@ dependencies {
 
     implementation ("androidx.test:core-ktx:1.5.0")
 
+    // Dependencies for Android instrumented unit tests
+    androidTestImplementation ("org.mockito:mockito-core:2.8.9")
+
+    androidTestImplementation ("com.linkedin.dexmaker:dexmaker-mockito:2.28.1")
+
+    androidTestImplementation ("androidx.test.espresso:espresso-contrib:3.5.1")
+    implementation("androidx.paging:paging-runtime-ktx:3.3.0")
+
+    androidTestImplementation ("androidx.navigation:navigation-testing:2.7.7")
+
+    androidTestImplementation ("com.google.truth:truth:1.4.2")
+
+
+
+
 
 
 

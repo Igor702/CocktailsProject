@@ -5,20 +5,16 @@ import com.example.cocktailsproject.data.FakeCocktailsRepository
 import org.junit.Before
 
 
-class CocktailsViewModelTest{
+class CocktailsViewModelTest {
 
     private lateinit var repository: FakeCocktailsRepository
     private lateinit var viewModel: CocktailsViewModel
 
     @Before
-    fun setUpViewModel(){
+    fun setUpViewModel() {
         repository = FakeCocktailsRepository()
         viewModel = CocktailsViewModel(repository)
     }
-
-
-
-
 
 
 }

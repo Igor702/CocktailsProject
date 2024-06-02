@@ -13,25 +13,25 @@ object ServiceLocator {
     private var repository: ICocktailsRepository? = null
 
     fun provideCocktailsRepository(): ICocktailsRepository {
-        synchronized(lock){
+        synchronized(lock) {
             return repository ?: createCocktailsRepository()
         }
     }
 
 
-    private fun createCocktailsRepository():ICocktailsRepository{
+    private fun createCocktailsRepository(): ICocktailsRepository {
         val newRepo = CocktailsRepository(RemoteDataSource())
         repository = newRepo
         return newRepo
     }
 
 
-    fun resetRepository(){
+    fun resetRepository() {
         repository = null
     }
 
     @VisibleForTesting
-    fun setTestRepository(repo: ICocktailsRepository){
+    fun setTestRepository(repo: ICocktailsRepository) {
         repository = repo
 
     }

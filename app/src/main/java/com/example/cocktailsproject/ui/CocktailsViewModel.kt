@@ -14,19 +14,16 @@ import kotlinx.coroutines.launch
 const val TAG = "TAG"
 
 sealed interface UIState {
-    data class Success(val data: Cocktail):UIState
-    object Loading:UIState
-    object Error: UIState
+    data class Success(val data: Cocktail) : UIState
+    object Loading : UIState
+    object Error : UIState
 
 }
+
 class CocktailsViewModel(private val repo: ICocktailsRepository) : ViewModel() {
 
     private var _data: MutableLiveData<UIState> = MutableLiveData(UIState.Loading)
     val data: LiveData<UIState> get() = _data
-
-
-
-
 
 
     fun loadRemoteData() {
@@ -55,7 +52,7 @@ class CocktailsViewModel(private val repo: ICocktailsRepository) : ViewModel() {
     }
 
     @Suppress("UNCHECKED_CAST")
-    class CocktailsViewModelFactory (
+    class CocktailsViewModelFactory(
         private val repo: ICocktailsRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -64,7 +61,7 @@ class CocktailsViewModel(private val repo: ICocktailsRepository) : ViewModel() {
 
 
     }
-    }
+}
 
 
 

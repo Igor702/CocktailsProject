@@ -5,7 +5,7 @@ import com.example.cocktailsproject.models.CocktailRequest
 import com.example.cocktailsproject.ui.TAG
 
 
-class RemoteDataSource: IRemoteDataSource {
+class RemoteDataSource : IRemoteDataSource {
 
     override suspend fun getRandomCocktail(): CocktailRequest {
 

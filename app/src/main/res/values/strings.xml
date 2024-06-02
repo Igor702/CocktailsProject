@@ -16,4 +16,6 @@
     <string name="onboarding_favourite">Add the cocktail to your favourite</string>
     <string name="onboarding_swipe">Swipe for loading a new cocktail</string>
     <string name="onboarding_error">When something get wrong - try again</string>
+    <string name="add_to_favourites_menu_item">Add to favourites</string>
+    <string name="in_favourites_menu_item">In favourites</string>
 </resources>

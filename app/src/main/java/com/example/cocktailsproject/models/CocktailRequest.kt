@@ -5,10 +5,10 @@ data class CocktailRequest(
     val drinks: List<DrinkRawData>
 )
 
-fun CocktailRequest.toCocktail():Cocktail{
+fun CocktailRequest.toCocktail(): Cocktail {
 
     this.drinks[0].apply {
-      return  Cocktail(
+        return Cocktail(
             idDrink = idDrink,
             strDrink = strDrink,
             strDrinkAlternate = strDrinkAlternate,
@@ -24,7 +24,7 @@ fun CocktailRequest.toCocktail():Cocktail{
             strInstructionsFR = strInstructionsFR,
             strInstructionsIT = strInstructionsIT,
             strInstructionsZHHANS = strInstructionsZHHANS,
-            strInstructionsZHHANT= strInstructionsZHHANT,
+            strInstructionsZHHANT = strInstructionsZHHANT,
             strDrinkThumb = strDrinkThumb,
             strIngredients = getIngredients(this),
             strMeasure1 = strMeasure1,
