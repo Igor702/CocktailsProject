@@ -1,6 +1,5 @@
 package com.example.cocktailsproject.ui
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,7 +32,6 @@ class CocktailsViewModel(private val repo: ICocktailsRepository) : ViewModel() {
                 _data.value = UIState.Success(repo.getRemoteData().toCocktail())
 
             } catch (e: Exception) {
-                Log.d(TAG, "vm, loadRemoteData, exception: $e")
                 _data.value = UIState.Error
             }
 
@@ -45,8 +43,6 @@ class CocktailsViewModel(private val repo: ICocktailsRepository) : ViewModel() {
 
     fun reloadRemoteData() {
         loadRemoteData()
-        val logInfo = _data.value.toString()
-        Log.d(TAG, "vm, getRemoteData, logInfo: $logInfo")
 
 
     }

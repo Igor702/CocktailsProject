@@ -3,6 +3,7 @@ package com.example.cocktailsproject.ui
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,8 @@ class CocktailsOnboardingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d(TAG, "Onboarding onCreate")
+
         _binding = FragmentOnboardingBinding.inflate(inflater, container, false)
         sharedPreferences = this.requireActivity()
             .getSharedPreferences(getString(R.string.onboarding_key_name), Context.MODE_PRIVATE)
@@ -60,6 +63,7 @@ class CocktailsOnboardingFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        Log.d(TAG, "Onboarding onDestroy")
         _binding = null
 
 

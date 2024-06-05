@@ -1,8 +1,5 @@
 package com.example.cocktailsproject
 
-import android.content.Context
-import android.content.SharedPreferences
-import androidx.annotation.VisibleForTesting
 import com.example.cocktailsproject.models.Onboarding
 import com.google.android.material.appbar.AppBarLayout
 
@@ -32,56 +29,3 @@ object PagingData {
     )
 }
 
-object PreferenceProvider {
-
-    private var isUnderTesting = false
-
-
-    private var sharedPreferences: SharedPreferences? = null
-
-
-    fun getBoolean(context: Context): Boolean {
-        if (isUnderTesting) {
-
-            return true
-        }
-
-        if (sharedPreferences == null) {
-            sharedPreferences = context.getSharedPreferences(
-                context.getString(R.string.onboarding_key_name),
-                Context.MODE_PRIVATE
-            )
-
-        }
-
-
-        return sharedPreferences!!.getBoolean(
-            context.getString(R.string.onboarding_key_value),
-            false
-        )
-
-
-    }
-
-    fun putBoolean(value: Boolean, context: Context) {
-
-        if (sharedPreferences == null) {
-            sharedPreferences = context.getSharedPreferences(
-                context.getString(R.string.onboarding_key_name),
-                Context.MODE_PRIVATE
-            )
-
-        }
-
-
-        sharedPreferences?.edit()
-            ?.putBoolean(context.getString(R.string.onboarding_key_value), value)?.apply()
-    }
-
-    @VisibleForTesting
-    fun setTestingMode(isTesting: Boolean) {
-        isUnderTesting = isTesting
-    }
-
-
-}

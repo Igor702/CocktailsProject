@@ -6,8 +6,10 @@
     </style>
 
     <style name="Theme.CocktailsProject" parent="Base.Theme.CocktailsProject" >
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:statusBarColor">@color/black</item>
+
+
+
     </style>
 
 

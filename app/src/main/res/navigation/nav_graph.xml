@@ -11,8 +11,9 @@
     <fragment
         android:id="@+id/cocktailsOnboardingFragment"
         android:name="com.example.cocktailsproject.ui.CocktailsOnboardingFragment"
-        android:label="CocktailsOnboardingFragment" >
+        android:label="CocktailsOnboardingFragment">
         <action
+
             android:id="@+id/action_cocktailsOnboardingFragment_to_infoFragment"
             app:destination="@id/infoFragment" />
     </fragment>
