@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
+
 }
 
 android {
@@ -116,6 +118,10 @@ dependencies {
     androidTestImplementation ("androidx.navigation:navigation-testing:2.7.7")
 
     androidTestImplementation ("com.google.truth:truth:1.4.2")
+
+    //Dagger
+    implementation ("com.google.dagger:dagger:2.48")
+    ksp("com.google.dagger:dagger-compiler:2.48")
 
 
 

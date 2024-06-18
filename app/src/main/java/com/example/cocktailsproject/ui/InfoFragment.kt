@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
 import com.example.cocktailsproject.AppBarCollapsed
+import com.example.cocktailsproject.CocktailsApplication
 import com.example.cocktailsproject.R
-import com.example.cocktailsproject.ServiceLocator
 import com.example.cocktailsproject.databinding.FragmentInfoBinding
 import kotlin.math.abs
 
@@ -27,8 +27,9 @@ class InfoFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: CocktailsViewModel by viewModels {
-        CocktailsViewModel.CocktailsViewModelFactory(ServiceLocator.provideCocktailsRepository())
+        (this.requireActivity().application as CocktailsApplication).daggerComponent.viewModelFactory()
     }
+//        CocktailsViewModel.CocktailsViewModelFactory(ServiceLocator.provideCocktailsRepository())
 
 
     override fun onCreateView(

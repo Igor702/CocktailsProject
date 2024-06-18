@@ -9,6 +9,8 @@ import com.example.cocktailsproject.data.ICocktailsRepository
 import com.example.cocktailsproject.models.Cocktail
 import com.example.cocktailsproject.models.toCocktail
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import javax.inject.Provider
 
 const val TAG = "TAG"
 
@@ -19,7 +21,7 @@ sealed interface UIState {
 
 }
 
-class CocktailsViewModel(private val repo: ICocktailsRepository) : ViewModel() {
+class CocktailsViewModel @Inject constructor(private val repo: ICocktailsRepository) : ViewModel() {
 
     private var _data: MutableLiveData<UIState> = MutableLiveData(UIState.Loading)
     val data: LiveData<UIState> get() = _data
@@ -47,15 +49,18 @@ class CocktailsViewModel(private val repo: ICocktailsRepository) : ViewModel() {
 
     }
 
-    @Suppress("UNCHECKED_CAST")
-    class CocktailsViewModelFactory(
-        private val repo: ICocktailsRepository
-    ) : ViewModelProvider.NewInstanceFactory() {
+    class Factory @Inject constructor(
+        myViewModelProvider: Provider<CocktailsViewModel>
+    ) : ViewModelProvider.Factory {
+
+        private val providers = mapOf<Class<*>, Provider<out ViewModel>>(
+            CocktailsViewModel::class.java to myViewModelProvider
+        )
+
+        @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return CocktailsViewModel(repo) as T
+            return (providers[modelClass]!!.get()) as T
         }
-
-
     }
 }
 

@@ -15,7 +15,6 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.example.cocktailsproject.R
-import com.example.cocktailsproject.ServiceLocator
 import com.example.cocktailsproject.data.FakeAndroidCocktailsRepository
 import com.example.cocktailsproject.isSwipeToRefreshAvailable
 import com.example.cocktailsproject.models.CocktailRequest
@@ -38,13 +37,13 @@ class InfoFragmentTest {
 
         repository = FakeAndroidCocktailsRepository()
 
-        ServiceLocator.setTestRepository(repository)
+//        ServiceLocator.setTestRepository(repository)
 
     }
 
     @After
     fun cleanUpRepository() {
-        ServiceLocator.resetRepository()
+//        ServiceLocator.resetRepository()
     }
 
 
