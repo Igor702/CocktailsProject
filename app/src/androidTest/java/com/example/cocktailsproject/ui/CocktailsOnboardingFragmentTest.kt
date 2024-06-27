@@ -29,10 +29,15 @@ class CocktailsOnboardingFragmentTest {
 
     @Test
     fun testOfVisibility_allAppropriateElementsAreVisible() {
+        val navController = mock(NavController::class.java)
+
         launchFragmentInContainer<CocktailsOnboardingFragment>(
             Bundle(),
             R.style.Theme_CocktailsProject
-        )
+        ).onFragment {
+            Navigation.setViewNavController(it.view!!, navController)
+        }
+
 
         val onboarding = Onboarding(R.drawable.onboarding_favourites, R.string.onboarding_favourite)
 

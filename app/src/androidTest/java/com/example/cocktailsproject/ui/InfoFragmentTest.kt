@@ -15,7 +15,9 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.example.cocktailsproject.R
-import com.example.cocktailsproject.data.FakeAndroidCocktailsRepository
+import com.example.cocktailsproject.TestCocktailsApplication
+import com.example.cocktailsproject.data.CocktailTestLoader
+import com.example.cocktailsproject.data.ICocktailsRepository
 import com.example.cocktailsproject.isSwipeToRefreshAvailable
 import com.example.cocktailsproject.models.CocktailRequest
 import com.example.cocktailsproject.models.DrinkRawData
@@ -25,17 +27,23 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import javax.inject.Inject
 
 
 @MediumTest
 @RunWith(AndroidJUnit4::class)
 class InfoFragmentTest {
-    private lateinit var repository: FakeAndroidCocktailsRepository
+
+    @Inject
+    lateinit var repository: ICocktailsRepository
 
     @Before
     fun setUpRepository() {
 
-        repository = FakeAndroidCocktailsRepository()
+        val component = TestCocktailsApplication().initializeComponent()
+
+        component.inject(this)
+
 
 //        ServiceLocator.setTestRepository(repository)
 
@@ -44,6 +52,7 @@ class InfoFragmentTest {
     @After
     fun cleanUpRepository() {
 //        ServiceLocator.resetRepository()
+        CocktailTestLoader.resetData()
     }
 
 
@@ -61,7 +70,7 @@ class InfoFragmentTest {
                 )
             )
         )
-        repository.setCocktail(cocktailRequest)
+        CocktailTestLoader.setCocktail(cocktailRequest)
 
 
 
@@ -126,7 +135,7 @@ class InfoFragmentTest {
                 )
             )
         )
-        repository.setCocktail(cocktailRequest)
+        CocktailTestLoader.setCocktail(cocktailRequest)
 
 
 
@@ -168,7 +177,7 @@ class InfoFragmentTest {
                 )
             )
         )
-        repository.setCocktail(cocktailRequest)
+        CocktailTestLoader.setCocktail(cocktailRequest)
 
 
 
@@ -188,7 +197,7 @@ class InfoFragmentTest {
                 )
             )
         )
-        repository.setCocktail(newCocktailRequest)
+        CocktailTestLoader.setCocktail(newCocktailRequest)
 
 
         onView(withId(R.id.refresh_layout)).perform(swipeDown())
@@ -212,7 +221,7 @@ class InfoFragmentTest {
                 )
             )
         )
-        repository.setCocktail(cocktailRequest)
+        CocktailTestLoader.setCocktail(cocktailRequest)
 
 
 
@@ -233,7 +242,7 @@ class InfoFragmentTest {
                 )
             )
         )
-        repository.setCocktail(newCocktailRequest)
+        CocktailTestLoader.setCocktail(newCocktailRequest)
 
 
         onView(withId(R.id.refresh_layout)).perform(swipeDown())
@@ -257,7 +266,7 @@ class InfoFragmentTest {
                 )
             )
         )
-        repository.setCocktail(cocktailRequest)
+        CocktailTestLoader.setCocktail(cocktailRequest)
 
 
 
@@ -287,9 +296,9 @@ class InfoFragmentTest {
                 )
             )
         )
-        repository.setCocktail(cocktailRequest)
+        CocktailTestLoader.setCocktail(cocktailRequest)
 
-        repository.setDelayForLoadingTesting(true)
+        CocktailTestLoader.setDelayForLoadingTesting(true)
 
         launchFragmentInContainer<InfoFragment>(Bundle(), R.style.Theme_CocktailsProject)
 
@@ -345,7 +354,7 @@ class InfoFragmentTest {
                 )
             )
         )
-        repository.setCocktail(newCocktailRequest)
+        CocktailTestLoader.setCocktail(newCocktailRequest)
 
 
         onView(withId(R.id.btn_error_try_again))
@@ -371,7 +380,7 @@ class InfoFragmentTest {
                 )
             )
         )
-        repository.setCocktail(newCocktailRequest)
+        CocktailTestLoader.setCocktail(newCocktailRequest)
 
 
         onView(withId(R.id.refresh_layout))

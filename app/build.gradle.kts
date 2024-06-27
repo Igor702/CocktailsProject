@@ -16,7 +16,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.cocktailsproject.di.MyCustomTestRunner"
     }
 
     buildTypes {
@@ -122,6 +123,7 @@ dependencies {
     //Dagger
     implementation ("com.google.dagger:dagger:2.48")
     ksp("com.google.dagger:dagger-compiler:2.48")
+    kspAndroidTest(("com.google.dagger:dagger-compiler:2.48"))
 
 
 
