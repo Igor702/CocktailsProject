@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:elevation="8dp"
+    android:id="@+id/card_recent_cocktail">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_view_card_recent"
+                android:layout_width="wrap_content"
+                android:layout_height="400dp"
+                android:contentDescription="@string/image_of_the_recent_cocktail"
+                android:src="@drawable/drink_loading_error"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/text_view_card_cocktail_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="21sp"
+                app:layout_constraintTop_toBottomOf="@id/image_view_card_recent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+   
+
+
+
+
+</com.google.android.material.card.MaterialCardView>

@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id ("androidx.navigation.safeargs.kotlin")
+
 
 }
 
@@ -43,6 +45,8 @@ android {
 }
 
 dependencies {
+
+    val room_version = "2.6.1"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -124,6 +128,17 @@ dependencies {
     implementation ("com.google.dagger:dagger:2.48")
     ksp("com.google.dagger:dagger-compiler:2.48")
     kspAndroidTest(("com.google.dagger:dagger-compiler:2.48"))
+
+
+    //Room
+    implementation("androidx.room:room-ktx:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
+
+
+
 
 
 

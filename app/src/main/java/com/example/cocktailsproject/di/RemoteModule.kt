@@ -9,5 +9,5 @@ import dagger.Module
 @Module
 interface RemoteModule {
     @Binds
-    fun provideIRemoteDataSource(remoteDataSource: RemoteDataSource): IRemoteDataSource
+    fun bindIRemoteDataSource(remoteDataSource: RemoteDataSource): IRemoteDataSource
 }

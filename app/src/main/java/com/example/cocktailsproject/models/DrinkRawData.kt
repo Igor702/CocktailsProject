@@ -3,7 +3,7 @@ package com.example.cocktailsproject.models
 import com.squareup.moshi.Json
 
 data class DrinkRawData(
-    @Json(name = "idDrink") var idDrink: String? = null,
+    @Json(name = "idDrink") var idDrink: Int? = null,
     @Json(name = "strDrink") var strDrink: String? = null,
     @Json(name = "strDrinkAlternate") var strDrinkAlternate: String? = null,
     @Json(name = "strTags") var strTags: String? = null,

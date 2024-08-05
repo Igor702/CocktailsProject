@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/cocktailsOnboardingFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/infoFragment"
@@ -18,7 +18,22 @@
             app:destination="@id/infoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/onboardingObjectFragment"
-        android:name="com.example.cocktailsproject.ui.OnboardingObjectFragment"
-        android:label="OnboardingObjectFragment" />
+        android:id="@+id/homeFragment"
+        android:name="com.example.cocktailsproject.ui.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_cocktailFragment"
+            app:destination="@id/cocktailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cocktailFragment"
+        android:name="com.example.cocktailsproject.ui.CocktailFragment"
+        android:label="CocktailFragment" >
+        <argument
+            android:name="cocktailId"
+            app:argType="integer" />
+        <argument
+            android:name="isLocalStorred"
+            app:argType="boolean" />
+    </fragment>
 </navigation>

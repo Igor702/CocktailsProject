@@ -27,7 +27,7 @@ class InfoFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: CocktailsViewModel by viewModels {
-        (this.requireActivity().application as CocktailsApplication).daggerComponent.viewModelFactory()
+        (this.requireActivity().application as CocktailsApplication).daggerComponent.cocktailsViewModelFactory()
     }
 //        CocktailsViewModel.CocktailsViewModelFactory(ServiceLocator.provideCocktailsRepository())
 
